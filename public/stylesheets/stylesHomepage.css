@@ -1,0 +1,107 @@
+body{
+	background-image: url("../images/background2.jpg");
+	background-repeat: no-repeat;
+	background-size: 100% 1000px;
+}
+img{	
+	margin-left: 0px;
+	height: 6%;
+	width: 6%;
+}
+#titleHome{
+	text-align:center;
+	padding-top: 20px;
+	font-size: 3em;
+}
+#textHome{
+	text-align:center;
+	font-size: 1.2em;
+}
+#card{
+	background: rgba(51, 170, 51, .7);
+}
+#cardImg{
+	height: 100%;
+	width: 100%;
+}
+#approved{
+	color: #26FE0D;
+	float: right;
+}
+#mandatory{
+	color:red;
+}
+select{
+	text-align-last:center;
+}
+#recommedationlist, #userlist{
+	background: rgba(51, 170, 51, .7);
+}
+#recommedationTable, #userTable{
+	margin-left: 20px;
+	margin-right: 20px;
+}
+#btnAdd{
+	margin-left: 30px;
+}
+#welcome, #logout{
+	background: rgba(51, 170, 51, .7);
+	margin-right: 150px;
+	margin-left: 150px;
+}
+#search{
+	margin-left: 120px;
+	margin-right: 820px;
+	background: rgba(51, 170, 51, .7);
+}
+#type_label{
+	padding-left: 5px;
+}
+#search_title{
+	text-align:center;
+	padding-top:5px;
+	padding-bottom: 5px;
+}
+.rating{
+  color: #E3F9E0;
+  margin: 0;
+  padding: 0;
+}
+
+ul.rating {
+  display: inline-block;
+}
+
+.rating li {
+  list-style-type: none;
+  display: inline-block;
+  padding: 1px;
+  text-align: center;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.rating .filled {
+  color: #26FE0D;
+}
+#average{
+	float: right;
+}
+#link {
+	color: #26FE0D;
+}
+#greeding{
+	margin-right: 0;
+	color: #C8F9DD;
+}
+
+#pagination li a:visited, #pagination li a:link {
+	color: #DDFA1E;
+	padding: 14px 25px;
+    text-align: center;
+    background: rgba(51, 170, 51, .7);
+}
+
+#pagination li a:hover {
+    background-color: #204F0C;
+}

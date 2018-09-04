@@ -1,0 +1,161 @@
+<toaster-container
+	toaster-options="{'close-button':false, 'time-out':{ 'toast-error': 3000, 'toast-success': 3000 } }"></toaster-container>
+<div class="container">
+	<div class="modal fade" id="addModal" role="dialog">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title">Add new recommendation</h4>
+				</div>
+				<div class="modal-body">
+					<p id="mandatory">* Mandatory fields</p>
+					<label>Title*</label> <input type="text" id="recommendation_title"
+						class="btn btn-light form-control" name="recommendation_title"
+						ng-model="recommendation_title" required /> <label>Content*</label>
+					<textarea type="text" id="recommendation_text" class="btn btn-light form-control"
+						name="recommendation_text" ng-model="recommendation_text" required></textarea>
+					<label>Location*</label> <input type="text"
+						id="recommendation_location" class="btn btn-light form-control"
+						name="recommendation_location" ng-model="recommendation_location"
+						required /> <label>Category*</label><br> <select
+					class="btn btn-light form-control dropdown-toggle"
+					ng-model="recommendation_category">
+					<option>restaurants</option>
+					<option>nutritions</option>
+					<option>hotels</option>
+					<option>bakery</option>
+					<option>cosmetics</option>
+					<option>food</option>
+					<option>clothes</option>
+					<option>attractions</option>
+				</select><br>
+				<label>Link</label> <input type="text"
+						id="recommendation_link" class="btn btn-light form-control"
+						name="recommendation_link" ng-model="recommendation_link" /> <label>Picture</label>
+					<input type="text" id="recommendation_pic" class="btn btn-light form-control"
+						name="recommendation_pic" ng-model="recommendation_pic" />
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-success" ng-click="postData()">Add</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade" id="updateModal" role="dialog">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4 class="modal-title">Update recommendation</h4>
+			</div>
+			<div class="modal-body">
+				<p id="mandatory">* Mandatory fields</p>
+				<label>ID*</label> <input type="text" id=recommendation_id
+					class="btn btn-light form-control" name="recommendation_id"
+					ng-model="selected_recommendation.recommendation_id" disabled /> <label>Title*</label>
+				<input type="text" id="recommendation_title" class="btn btn-light form-control"
+					name="recommendation_title"
+					ng-model="selected_recommendation.recommendation_title" required />
+				<label>Content*</label> <textarea type="text" id="recommendation_text"
+					class="btn btn-light form-control" name="recommendation_text"
+					ng-model="selected_recommendation.recommendation_text" required></textarea>
+				<label>Location*</label> <input type="text"
+					id="recommendation_location" class="btn btn-light form-control"
+					name="recommendation_location"
+					ng-model="selected_recommendation.recommendation_location" required />
+				<label>Category*</label><br> <select id="dropdown"
+					class="btn btn-light form-control dropdown-toggle"
+					ng-model="selected_recommendation.recommendation_category">
+					<option>restaurants</option>
+					<option>nutritions</option>
+					<option>hotels</option>
+					<option>bakery</option>
+					<option>cosmetics</option>
+					<option>food</option>
+					<option>clothes</option>
+					<option>attractions</option>
+				</select><br>
+				<label>Link</label> <input type="text" id="recommendation_link"
+					class="btn btn-light form-control" name="recommendation_link"
+					ng-model="selected_recommendation.recommendation_link" /> <label>Picture</label>
+				<input type="text" id="recommendation_pic" class="btn btn-light form-control"
+					name="recommendation_pic"
+					ng-model="selected_recommendation.recommendation_pic" />
+				<div class="modal-footer">
+					<button type="button" class="btn btn-success"
+						ng-click="updateData()">Update</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade" id="deleteModal" role="dialog">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4 class="modal-title">Confirmation</h4>
+			</div>
+			<div class="modal-body">
+				<p>Are you sure you want to delete
+					{{selected_recommendation.recommendation_title}}?</p>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-success" data-dismiss="modal"
+					ng-click="deleteData()">Delete</button>
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<br>
+<button type="submit" value="Submit" class="btn btn-success btn-lg"
+	id="btnAdd" data-toggle="modal" data-target="#addModal">
+	<span class="fa fa-plus-square"></span>&nbsp;Add new
+</button>
+<br>
+<br>
+<div id="recommedationTable">
+	<table id="recommedationlist" ng-table="recommedationlist"
+		class="table table-condensed table-bordered table-striped table-hover"
+		style="width: 100%">
+		<tr>
+			<th>Title</th>
+			<th>Category</th>
+			<th>Content</th>
+			<th>Status</th>
+			<th>Link</th>
+			<th>Location</th>
+			<th>Edit</th>
+			<th>Delete</th>
+		</tr>
+		<tr dir-paginate="recommendation in recommendations | itemsPerPage: 5"
+			ng-class-even="'info'" ng-class-odd="'success'">
+			<td>{{recommendation.recommendation_title}}</td>
+			<td>{{recommendation.recommendation_category}}</td>
+			<td>{{recommendation.recommendation_text}}</td>
+			<td><span class="fas fa-check-circle"
+				ng-show="recommendation.is_approved=='reviewed'"></span> <span
+				class="fas fa-clock"
+				ng-show="recommendation.is_approved=='not reviewed'"></span></td>
+			<td>{{recommendation.recommendation_link}}</td>
+			<td>{{recommendation.recommendation_location}}</td>
+			<td><a data-toggle="modal" data-target="#updateModal"
+				ng-click="openModal(recommendation)"><span
+					class="fa fa-pencil-alt"></span></a></td>
+			<td><a data-toggle="modal" data-target="#deleteModal"
+				ng-click="openModal(recommendation)"><span
+					class="fa fa-trash-alt"></span></a></td>
+		</tr>
+	</table>
+<dir-pagination-controls id="pagination"
+                max-size="5"
+                direction-links="true"
+                boundary-links="true">
+</dir-pagination-controls>
+</div>
+</div>

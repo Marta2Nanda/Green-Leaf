@@ -1,0 +1,54 @@
+<br>
+<toaster-container toaster-options="{'close-button':false, 'time-out':{ 'toast-error': 2000, 'toast-success': 2000 } }"></toaster-container>
+<div id="search">
+	<h5 id="search_title">
+		<span class="fas fa-search"></span>&nbsp;Search
+	</h5>
+	<label id="type_label">Category:<br><select
+					class="btn btn-light dropdown-toggle"
+					ng-model="typeSearch">
+					<option></option>
+					<option>restaurants</option>
+					<option>nutritions</option>
+					<option>hotels</option>
+					<option>bakery</option>
+					<option>cosmetics</option>
+					<option>food</option>
+					<option>clothes</option>
+					<option>attractions</option>
+				</select></label> <label>Location:
+		<input class="btn btn-light form-control" ng-model="locationSearch">
+	</label>
+</div>
+<div class="container">
+	<br>
+	<div class="row">
+		<div class="col-sm-6 col-md-4 col-lg-3"
+			dir-paginate="recommendation in recommendations | filter: { recommendation_category: typeSearch }  | filter: { recommendation_location: locationSearch } | itemsPerPage: 4">
+			<div ng-model="recommendation_id" id="card"class="card flexcss">
+				<img id="cardImg" class="img-fluid"
+					ng-src="./public/images/{{recommendation.recommendation_pic}}">
+				<div class="card-body">
+				<span id="approved" class="fas fa-check" ng-show="recommendation.is_approved=='reviewed'"></span>
+					<h4 class="card-title">{{recommendation.recommendation_title}}</h4>
+					<p class="card-text">
+						{{recommendation.recommendation_category}}<br>
+						{{recommendation.recommendation_location}}<br>
+					<a id="link" href="{{recommendation.recommendation_link}}">Visit the page</a>
+					<p class="card-text">{{recommendation.recommendation_text}}</p>
+					</p>
+					<div star-rating dt-average="recommendation.average_rating" dt-votes="recommendation.votes" dt-total="recommendation.rating_total"
+					dt-id="recommendation.recommendation_id" ng-init="rating = recommendation.recommendation_rating" 
+					class="star-rating" star-rating rating-value="rating" data-max="5" on-rating-selected="rateFunction(rating)"></div>
+					<span id="average" class="fas fa-star">{{recommendation.average_rating | number:2}}/{{recommendation.votes}} vote(s)</span>
+				</div>
+			</div>
+		</div>
+	</div>
+	<br>
+	<br>
+<dir-pagination-controls id="pagination"
+                max-size="4"
+                direction-links="true"
+                boundary-links="true">
+</dir-pagination-controls>

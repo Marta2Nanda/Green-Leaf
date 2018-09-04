@@ -1,0 +1,38 @@
+{
+  "name": "greenLeaf",
+  "version": "0.0.2",
+  "description": "GreenLeaf App",
+  "main": "app.js",
+  "private": true,
+  "dependencies": {
+    "@angular/cli": "^6.0.8",
+    "body-parser": "^1.17.1",
+    "chai-as-promised": "^7.1.1",
+    "chai-http": "^4.0.0",
+    "crypto": "^1.0.1",
+    "ejs": "^2.6.1",
+    "express": "^4.14.1",
+    "express-session": "^1.15.6",
+    "express-validator": "^5.2.0",
+    "js": "^0.1.0",
+    "jsonwebtoken": "^7.3.0",
+    "mocha": "^5.2.0",
+    "mysql": "^2.16.0",
+    "nyc": "^12.0.2",
+    "validator": "^10.4.0"
+  },
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "chai-things": "^0.2.0",
+    "istanbul": "^0.4.5",
+    "selenium-server-standalone": "^2.53.1",
+    "should": "^13.2.3",
+    "supertest": "^3.1.0"
+  },
+  "scripts": {
+    "test": "nyc --reporter=html --reporter=text mocha --exit",
+    "coverage": "istanbul cover node_modules/mocha/bin/_mocha"
+  },
+  "author": "marta nanda",
+  "license": "ISC"
+}

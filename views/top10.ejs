@@ -1,0 +1,31 @@
+<br>
+<div class="container">
+	<br>
+	<div class="row">
+		<div class="col-sm-6 col-md-4 col-lg-3"
+			dir-paginate="recommendation in top10 | itemsPerPage: 4">
+			<div ng-model="recommendation_id" id="card"class="card flexcss">
+				<img id="cardImg" class="img-fluid"
+					ng-src="./public/images/{{recommendation.recommendation_pic}}">
+				<div class="card-body">
+				<span id="approved" class="fas fa-check" ng-show="recommendation.is_approved=='reviewed'"></span>
+					<h4 class="card-title">{{recommendation.recommendation_title}}</h4>
+					<p class="card-text">
+						{{recommendation.recommendation_category}}<br>
+						{{recommendation.recommendation_location}}<br>
+					<a id="link" href="{{recommendation.recommendation_link}}">Visit the page</a>
+					<p class="card-text">{{recommendation.recommendation_text}}</p>
+					</p>
+					<span id="average" class="fas fa-star">{{recommendation.average_rating | number:2}}/{{recommendation.votes}} vote(s)</span>
+				</div>
+			</div>
+		</div>
+	</div>
+	<br>
+	<br>
+<dir-pagination-controls id="pagination"
+                max-size="4"
+                direction-links="true"
+                boundary-links="true">
+</dir-pagination-controls>
+</div>

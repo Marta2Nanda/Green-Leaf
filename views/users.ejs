@@ -1,0 +1,72 @@
+<toaster-container
+	toaster-options="{'close-button':false, 'time-out':{ 'toast-error': 3000, 'toast-success': 3000 } }"></toaster-container>
+	<div class="modal fade" id="createModal" role="dialog">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title">Create new admin</h4>
+				</div>
+				<div class="modal-body">
+					<p id="mandatory">* Mandatory fields</p>
+					<label>Email*</label> <input type="text" id="user_email"
+						class="btn btn-light form-control" name="user_email"
+						ng-model="user_email" required /> <label>Name*</label>
+					<input type="text" id="user_name_new" class="btn btn-light form-control"
+						name="user_name_new" ng-model="user_name_new" required />
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-success" ng-click="addAdmin()">Create</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+<div class="modal fade" id="deleteModal" role="dialog">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4 class="modal-title">Confirmation</h4>
+			</div>
+			<div class="modal-body">
+				<p>Are you sure you want to delete
+					{{selected_user.user_email}}?</p>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-success" data-dismiss="modal"
+					ng-click="deleteUser()">Delete</button>
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<br>
+<button type="submit" value="Submit" class="btn btn-success btn-lg"
+	id="btnAdd" data-toggle="modal" data-target="#createModal">
+	<span class="fas fa-user-plus"></span>&nbsp;Create admin
+</button>
+<br>
+<br>
+<div id="userTable">
+	<table  id ="userlist" ng-table ="userlist" class="table table-condensed table-bordered table-striped table-hover" style="width: 100%">
+		<tr>
+			<th>User email</th>
+			<th>User type</th>
+			<th>Delete</th>
+		</tr>
+		<tr dir-paginate="user in users | itemsPerPage: 5"
+			ng-class-even="'info'" ng-class-odd="'success'">
+			<td>{{user.user_email}}</td>
+			<td>{{user.user_type}}</td>
+			<td><a data-toggle="modal" data-target="#deleteModal"
+				ng-click="openModal(user)" ng-show="user.user_type=='user'"><span
+					class="fa fa-trash-alt"></span></a></td>
+		</tr>
+	</table>
+<dir-pagination-controls id="pagination"
+                max-size="5"
+                direction-links="true"
+                boundary-links="true">
+</dir-pagination-controls>
+</div>
